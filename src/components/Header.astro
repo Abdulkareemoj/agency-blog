@@ -1,13 +1,20 @@
 ---
 import { Icon } from "astro-icon/components";
+// import Logo from "./Logo.astro";
 import ToggleTheme from "./ThemeToggle.astro";
 import ToggleMenu from "./ToggleMenu.astro";
 import Button from "./Button.astro";
 
 import { getHomePermalink } from "../utils/permalinks";
 import { trimSlash, getAsset } from "../utils/permalinks";
-// import type { CallToAction } from "~/types";
-
+import type { HTMLAttributes } from "astro/types";
+export interface CallToAction extends HTMLAttributes<a> {
+  variant?: "primary" | "secondary" | "tertiary" | "link";
+  text?: string;
+  icon?: string;
+  classes?: Record<string, string>;
+  type?: "button" | "submit" | "reset";
+}
 interface Link {
   text?: string;
   href?: string;
@@ -71,7 +78,10 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
         "flex justify-between",
       ]}
     >
-      <a class="flex items-center" href={getHomePermalink()}> Home </a>
+      <a class="flex items-center" href={getHomePermalink()}>
+        <!-- <Logo /> -->
+        Help
+      </a>
       <div class="flex items-center md:hidden">
         <ToggleMenu />
       </div>
